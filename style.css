@@ -1,0 +1,213 @@
+/* variables */
+:root {
+  --primary: #ff0000;
+  --secondary: #ffffff;
+  --tertiary: #a0a0a0;
+  --quaternary: #d0d0d0;
+  --player-0: white;
+  --player-1: green;
+  --player-2: red;
+  --player-3: yellow;
+  --player-4: blue;
+  --player-clear: white;
+  --player-dark: black;
+  --stripped-odd: #c0c0c0;
+  --stripped-even: #ffffff;
+}
+/* reset */
+body, p, a, ul, li {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+li {
+  list-style-type: none;
+}
+/* base styles */
+body {
+  background: var(--secondary);
+  overflow-x: hidden;
+  font-family: 'Caveat';
+}
+header {
+  display: flex;
+  justify-content: center;
+  min-height: 50px;
+}
+header > h1 {
+  color: var(--primary);
+  font-size: 2em;
+}
+.table > ul.rails {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  gap: 5px;
+  min-height: 70vh;
+}
+.table > ul:last-child {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  min-height: 20px;
+  margin: 5px;
+}
+.table > ul:last-child > li {
+  overflow: hidden;
+  max-width: 100px;
+  text-align: center;
+  border: 1px solid black !important;
+  color: var(--player-clear);
+  text-overflow: ellipsis;
+}
+.table > ul:last-child > li:nth-child(1) {
+  background-color: var(--player-1);
+}
+.table > ul:last-child > li:nth-child(2) {
+  background-color: var(--player-2);
+}
+.table > ul:last-child > li:nth-child(3) {
+  background-color: var(--player-3);
+  color: var(--player-dark) !important;
+}
+.table > ul:last-child > li:nth-child(4) {
+  background-color: var(--player-4);
+}
+.rails > li {
+  display: grid;
+  grid-template-rows: auto;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+}
+.rails > li:nth-child(odd) {
+  background-color: var(--tertiary);
+}
+.rails > li:nth-child(even) {
+  background-color: var(--quaternary);
+}
+.rails > li > h5 {
+  color: var(--player-clear);
+  font-weight: bold;
+  font-size: 1.3em;
+  position: absolute;
+  top: 0;
+}
+.rails > li.cy > h5 {
+  color: var(--player-dark);
+}
+.rails > li > ul {
+  position: absolute;
+  top: 60px;
+}
+.rail > li {
+  color: var(--primary);
+  position: relative;
+  border: 1px solid black;
+  margin-bottom: 5px;
+  width: 20px;
+  height: 20px;
+}
+.rail > li:nth-child(odd) {
+  background: var(--stripped-odd);
+}
+.rail > li:nth-child(even) {
+  background: var(--stripped-even);
+}
+.pg, .pr, .pb, .py, .pw {
+  border-radius: 10px;
+  width: 10px !important;
+  height: 10px !important;
+  position: absolute;
+  color: var(--quaternary) !important;
+}
+.cg {
+  background: var(--player-1) !important;
+}
+.cr {
+  background: var(--player-2) !important;
+}
+.cy {
+  background: var(--player-3) !important;
+}
+.cb {
+  background: var(--player-4) !important;
+}
+.pw {
+  border: 1px solid var(--player-0);
+  background: var(--player-0);
+  left: 4px;
+  top: 4px;
+}
+.pg {
+  border: 1px solid var(--player-1);
+  background: var(--player-1);
+  top: 1px;
+  left: 1px;
+}
+.pr {
+  border: 1px solid var(--player-2);
+  background: var(--player-2);
+  top: 1px;
+  right: 1px;
+}
+.py {
+  border: 1px solid var(--player-3);
+  background: var(--player-3);
+  bottom: 1px;
+  left: 1px;
+}
+.pb {
+  border: 1px solid var(--player-4);
+  background: var(--player-4);
+  bottom: 1px;
+  right: 1px;
+}
+li:nth-child(1) > .rail > li:before {
+  content: '\00a0 2';
+}
+li:nth-child(2) > .rail > li:before {
+  content: '\00a0 3';
+}
+li:nth-child(3) > .rail > li:before {
+  content: '\00a0 4';
+}
+li:nth-child(4) > .rail > li:before {
+  content: '\00a0 5';
+}
+li:nth-child(5) > .rail > li:before {
+  content: '\00a0 6';
+}
+li:nth-child(6) > .rail > li:before {
+  content: '\00a0 7';
+}
+li:nth-child(7) > .rail > li:before {
+  content: '\00a0 8';
+}
+li:nth-child(8) > .rail > li:before {
+  content: '\00a0 9';
+}
+li:nth-child(9) > .rail > li:before {
+  content: '10';
+}
+li:nth-child(10) > .rail > li:before {
+  content: '11';
+}
+li:nth-child(11) > .rail > li:before {
+  content: '12';
+}
+.rail > li > :before {
+  content: '\00a0';
+}
+.rail > li > span {
+  height: 15px;
+  width: 15px;
+}
+.rails > li > h5 {
+  top: -30px;
+}
+main {
+  min-height: calc(100vh - 70px - 70px);
+}
+header, footer {
+  height: 70px;
+}
