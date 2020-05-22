@@ -2,7 +2,10 @@ script:
   - export GITHUB_URL="https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/boardgame-cantstop/boardgame-cantstop.github.io"
   - mkdir -p build
   - cp -frv index.html style.css build
-  - cd build
+  - git clone "$GITHUB_URL" site
+  - rm -frv site/*
+  - cp -frv build/* site
+  - cd site
   - git config user.name "$GITHUB_USERNAME"
   - git config user.email "$GITHUB_USERMAIL"
   - git add --all
