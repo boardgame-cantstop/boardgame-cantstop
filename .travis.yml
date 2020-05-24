@@ -26,7 +26,7 @@ script:
 - docker-compose --file docker-compose.ci.yml exec app /bin/sh -c 'yarn install && yarn build'
 - git clone "$GITHUB_URL" site
 - rm -frv site/*
-- cp -frv build/* site
+- cp -frv app/build/* site
 - cd site
 - git config user.name "$GITHUB_USERNAME"
 - git config user.email "$GITHUB_USERMAIL"

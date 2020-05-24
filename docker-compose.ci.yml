@@ -6,5 +6,5 @@ services:
     volumes:
     - .:/ws
     entrypoint: /bin/sh -c 'tail -f'
-    working_dir: /ws
+    working_dir: /ws/app
 

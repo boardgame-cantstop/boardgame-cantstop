@@ -6,7 +6,7 @@ services:
     volumes:
     - .:/ws
     entrypoint: /bin/sh -c 'yarn install && yarn dev; tail -f'
-    working_dir: /ws
+    working_dir: /ws/app
     ports:
     - 80:80
     environment:
