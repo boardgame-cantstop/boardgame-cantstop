@@ -36,4 +36,5 @@ script:
 - git push origin master
 
 after_script:
-- docker-compose down --volumes --remove-orphans
+- docker-compose --file docker-compose.ci.yml down --volumes --remove-orphans
+
