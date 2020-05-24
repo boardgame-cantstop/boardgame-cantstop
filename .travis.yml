@@ -1,14 +1,39 @@
+sudo: required
+
+services:
+- docker
+
+env:
+- DOCKER_COMPOSE_VERSION=1.25.5
+
+before_install:
+- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+- sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+- sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+- sudo apt-get update
+- sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+- sudo rm /usr/local/bin/docker-compose
+- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+- chmod +x docker-compose
+- sudo mv docker-compose /usr/local/bin
+
+before_script:
+- docker-compose down --volumes --remove-orphans
+- docker-compose up --detach
+
 script:
-  - export GITHUB_URL="https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/boardgame-cantstop/boardgame-cantstop.github.io"
-  - mkdir -p build
-  - cp -frv index.html style.css build
-  - git clone "$GITHUB_URL" site
-  - rm -frv site/*
-  - cp -frv build/* site
-  - cd site
-  - git config user.name "$GITHUB_USERNAME"
-  - git config user.email "$GITHUB_USERMAIL"
-  - git add --all
-  - git commit -m "Build $TRAVIS_BUILD_NUMBER"
-  - git remote set-url origin "$GITHUB_URL"
-  - git push origin master
+- export GITHUB_URL="https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/boardgame-cantstop/boardgame-cantstop.github.io"
+- docker-compose exec app /bin/sh -c 'yarn install && yarn build'
+- git clone "$GITHUB_URL" site
+- rm -frv site/*
+- cp -frv build/* site
+- cd site
+- git config user.name "$GITHUB_USERNAME"
+- git config user.email "$GITHUB_USERMAIL"
+- git add --all
+- git commit -m "Build $TRAVIS_BUILD_NUMBER"
+- git remote set-url origin "$GITHUB_URL"
+- git push origin master
+
+after_script:
+- docker-compose down --volumes --remove-orphans
