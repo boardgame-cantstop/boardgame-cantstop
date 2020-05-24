@@ -18,12 +18,12 @@ before_install:
 - sudo mv docker-compose /usr/local/bin
 
 before_script:
-- docker-compose down --volumes --remove-orphans
-- docker-compose up --detach
+- docker-compose --file docker-compose.ci.yml down --volumes --remove-orphans
+- docker-compose --file docker-compose.ci.yml up --detach
 
 script:
 - export GITHUB_URL="https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/boardgame-cantstop/boardgame-cantstop.github.io"
-- docker-compose exec app /bin/sh -c 'yarn install && yarn build'
+- docker-compose --file docker-compose.ci.yml exec app /bin/sh -c 'yarn install && yarn build'
 - git clone "$GITHUB_URL" site
 - rm -frv site/*
 - cp -frv build/* site
