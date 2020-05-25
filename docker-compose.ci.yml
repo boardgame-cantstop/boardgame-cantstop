@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   app:
-    image: node:latest
+    image: node:lts-alpine
     volumes:
     - .:/ws
     entrypoint: /bin/sh -c 'tail -f'
