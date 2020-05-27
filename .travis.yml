@@ -16,6 +16,7 @@ before_install:
 - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
 - chmod +x docker-compose
 - sudo mv docker-compose /usr/local/bin
+- curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
 
 before_script:
 - docker-compose --file docker-compose.ci.yml down --volumes --remove-orphans
@@ -24,15 +25,28 @@ before_script:
 script:
 - export GITHUB_URL="https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/boardgame-cantstop/boardgame-cantstop.github.io"
 - docker-compose --file docker-compose.ci.yml exec app /bin/sh -c "/ws/app/config.sh ci $TRAVIS_BUILD_NUMBER"
-- git clone "$GITHUB_URL" site
-- rm -frv site/*
-- cp -frv app/build/* site
-- cd site
+- git clone "$GITHUB_URL" deploy/app
+- rm -frv deploy/app/*
+- cp -frv app/build/* deploy/app
+- cd deploy/app
 - git config user.name "$GITHUB_USERNAME"
 - git config user.email "$GITHUB_USERMAIL"
 - git add --all
 - git commit -m "Build $TRAVIS_BUILD_NUMBER"
 - git remote set-url origin "$GITHUB_URL"
+- git push origin master
+
+- export HEROKU_URL="https://$GITHUB_USERNAME:$HEROKU_TOKEN@git.heroku.com/boardgame-cantstop.git"
+- docker-compose --file docker-compose.ci.yml exec api /bin/sh -c "/ws/api/config.sh ci $TRAVIS_BUILD_NUMBER"
+- git clone "$HEROKU_URL" deploy/api
+- rm -frv deploy/api/*
+- cp -frv api/build/* deploy/api
+- cd deploy/api
+- git config user.name "$GITHUB_USERNAME"
+- git config user.email "$GITHUB_USERMAIL"
+- git add --all
+- git commit -m "Build $TRAVIS_BUILD_NUMBER"
+- git remote set-url origin "$HEROKU_URL"
 - git push origin master
 
 after_script:

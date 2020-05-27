@@ -1,0 +1,14 @@
+{
+  "version": "0.1.0",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon -e json,js --ignore node_modules 'yarn start'",
+    "build": "mkdir -p build && cp -frv package.json number.json index.js build"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

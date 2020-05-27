@@ -8,3 +8,10 @@ services:
     entrypoint: /bin/sh -c 'tail -f'
     working_dir: /ws/app
 
+  api:
+    image: node:lts-alpine
+    volumes:
+    - .:/ws
+    entrypoint: /bin/sh -c 'tail -f'
+    working_dir: /ws/api
+

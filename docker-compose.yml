@@ -12,3 +12,16 @@ services:
     environment:
       PORT: 80
       HOST: 0.0.0.0
+
+  api:
+    image: node:lts-alpine
+    volumes:
+    - .:/ws
+    entrypoint: /bin/sh -c '/ws/api/config.sh; tail -f'
+    working_dir: /ws/api
+    ports:
+    - 3000
+    environment:
+      PORT: 3000
+      HOST: 0.0.0.0
+
