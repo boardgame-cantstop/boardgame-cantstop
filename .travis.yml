@@ -35,7 +35,7 @@ script:
 - git commit -m "Build $TRAVIS_BUILD_NUMBER"
 - git remote set-url origin "$GITHUB_URL"
 - git push origin master
-
+- cd -
 - export HEROKU_URL="https://$GITHUB_USERNAME:$HEROKU_TOKEN@git.heroku.com/boardgame-cantstop.git"
 - docker-compose --file docker-compose.ci.yml exec api /bin/sh -c "/ws/api/config.sh ci $TRAVIS_BUILD_NUMBER"
 - git clone "$HEROKU_URL" deploy/api
