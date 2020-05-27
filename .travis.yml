@@ -23,7 +23,7 @@ before_script:
 
 script:
 - export GITHUB_URL="https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/boardgame-cantstop/boardgame-cantstop.github.io"
-- docker-compose --file docker-compose.ci.yml exec app /bin/sh -c "/ws/app/config.sh ci"
+- docker-compose --file docker-compose.ci.yml exec app /bin/sh -c "/ws/app/config.sh ci $TRAVIS_BUILD_NUMBER"
 - git clone "$GITHUB_URL" site
 - rm -frv site/*
 - cp -frv app/build/* site
