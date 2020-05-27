@@ -5,7 +5,7 @@ services:
     image: node:lts-alpine
     volumes:
     - .:/ws
-    entrypoint: /bin/sh -c 'yarn install && yarn dev; tail -f'
+    entrypoint: /bin/sh -c '/ws/app/config.sh; tail -f'
     working_dir: /ws/app
     ports:
     - 80:80
