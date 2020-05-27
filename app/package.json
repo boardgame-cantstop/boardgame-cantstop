@@ -1,4 +1,5 @@
 {
+  "version": "0.1.0",
   "scripts": {
     "build": "mkdir -p build && cp -frv index.html style.css build",
     "dev": "live-server"
